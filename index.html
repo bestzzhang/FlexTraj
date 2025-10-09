@@ -137,6 +137,28 @@
             <h1 class="title is-1 publication-title">
               FlexTraj: Image-to-Video Generation with Flexible Point Trajectory Control
             </h1>
+            
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://scholars.cityu.edu.hk/en/persons/zzhang452/publications/" target="_blank">Zhiyuan
+                  Zhang<sup>1</sup></a>,</span>
+                <span class="author-block">
+                <a href="https://cassiepython.github.io/" target="_blank">Can
+                  Wang<sup>2</sup></a>,</span>
+                <span class="author-block">
+                <a href="https://www.dongdongchen.bid/" target="_blank">Dongdong
+                  Chen<sup>3</sup></a>,</span>
+                <a href="https://www.cityu.edu.hk/stfprofile/jingliao.htm" target="_blank">Jing
+                  Liao<sup>1</sup></a>,</span>
+                  
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <sup>1</sup>City University of Hong Kong,<br>
+                <sup>2</sup>The University of Hong Kong,
+                <sup>3</sup>Microsoft GenAI
+              </span>
+            </div>
 
             <div class="column has-text-centered">
               <div class="publication-links">
@@ -188,31 +210,69 @@
       </div>
     </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
   </section>
 
   <!-- Teaser image -->
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <div style="margin-top: 15px;"></div>
+        <!-- <div style="margin-top: 15px;"></div> -->
         <h2 class="subtitle has-text-centered">
           We present <strong>FlexTraj</strong>, a multi-granularity, alignment-agnostic trajectory-control video
           generation model <br>for all
           the following tasks.
         </h2>
         <div style="margin-top: 30px;"></div>
-        <video poster="" id="teaser" autoplay muted loop controlsList="nodownload" playsinline>
-          <!-- Your video file here -->
+        <!-- <video poster="" id="teaser" autoplay muted loop controlsList="nodownload" playsinline>
           <source src="static/videos/teaser.mp4" type="video/mp4">
-        </video>
+        </video> -->
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item item-video">
+            <video poster="" muted loop height="100%" preload="metadata">
+              <source src="static/videos/teaser.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video">
+            <video poster="" muted loop height="100%" preload="metadata">
+              <source src="static/videos/1_motion.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video">
+            <video poster="" muted loop height="100%" preload="metadata">
+              <source src="static/videos/2_drag.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video">
+            <video poster="" muted loop height="100%" preload="metadata">
+              <source src="static/videos/3_motion.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video">
+            <video poster="" muted loop height="100%" preload="metadata">
+              <source src="static/videos/4_camera.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video">
+            <video poster="" muted loop height="100%" preload="metadata">
+              <source src="static/videos/5_flexible.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video">
+            <video poster="" muted loop height="100%" preload="metadata">
+              <source src="static/videos/6_mesh.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video">
+            <video poster="" muted loop height="100%" preload="metadata">
+              <source src="static/videos/7_mesh.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video">
+            <video poster="" muted loop height="100%" preload="metadata">
+              <source src="static/videos/8_mesh.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -249,6 +309,38 @@
     </div>
   </section>
   <!-- End paper abstract -->
+
+  <!-- Method -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3" style="text-align:center;">Method</h2>
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item">
+            <img src="static/images/frameworks/overview.png" alt="First research result visualization" loading="lazy" />
+            <h2 class="subtitle has-text-centered">
+              Overview of the FlexTraj framework. Given 3D-tracking points annotated with TrackID,
+              SegID, and optional Color, users can sparsify or shift trajectories to define spatially sparse, temporally sparse, 
+              or unaligned controls. These modified trajectories are projected into condition videos
+              (ID-coded and color-cue) and combined with the first frame and text prompt as inputs to a video
+              diffusion model via efficient sequence-concatenation.
+            </h2>
+          </div>
+          <div class="item">
+            <!-- Your image here -->
+            <img src="static/images/frameworks/model_comp.png" alt="Second research result visualization"
+              loading="lazy" />
+            <h2 class="subtitle has-text-centered">
+               Comparison of condition-injection frameworks. (a) ControlNet-Style condition injection.
+              (b) Sequence-Concatenation condition injection. (c) Our Efficient Sequence-Concatenation with
+              LoRA and masked attention. (d) Causal mask.
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Method -->
 
   <!-- Results -->
   <section class="section hero" id="results">
@@ -882,7 +974,8 @@
           <div class="container" style="max-width: 1000px;">
             <h2 class="title has-text-centered" style="font-size: 2em;">
               Flexible Action Control (Real-world Video)
-              <a href="unaligned.html#unaligned-real" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+              <a href="unaligned.html#unaligned-real" class="button is-small is-rounded is-dark"
+                style="margin-left: 10px;">
                 Click for More Results
               </a>
               <p class="button is-small is-rounded is-dark" disabled>
@@ -961,7 +1054,8 @@
           <div class="container" style="max-width: 1000px;">
             <h2 class="title has-text-centered" style="font-size: 2em;">
               Flexible Action Control (Synthesis Video)
-              <a href="unaligned.html#unaligned-syn" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+              <a href="unaligned.html#unaligned-syn" class="button is-small is-rounded is-dark"
+                style="margin-left: 10px;">
                 Click for More Results
               </a>
               <p class="button is-small is-rounded is-dark" disabled>

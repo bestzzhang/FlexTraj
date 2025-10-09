@@ -110,6 +110,7 @@ body {
 }
 
 .teaser {
+  padding-top: 0rem;
   font-family: 'Inter', sans-serif;
 }
 
@@ -256,7 +257,7 @@ body {
 
 .results-carousel {
   overflow: hidden;
-  padding: 1rem 0;
+  padding: 0rem 0;
 }
 
 .results-carousel .item {
