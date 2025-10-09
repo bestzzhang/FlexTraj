@@ -1,1 +1,1 @@
-# Diffusion as Shader: 3D-aware Video Diffusion for Versatile Video Generation Control
+# FlexTraj: Image-to-Video Generation with Flexible Point Trajectory Control
