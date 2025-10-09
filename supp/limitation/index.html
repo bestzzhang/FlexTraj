@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Limitation</title>
+  <style>
+    td {
+      text-align: center;
+    }
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <table border="1" style="width: 1100px; height: 480px;">
+    <tr>
+      <td>
+        <video width="1080" height="460" controls>
+          <source src="limit.mp4" type="video/mp4">
+        </video>
+        <p>
+          (1). Motion alignment is limited by tracking quality (top row: glove).
+        </p>
+        <p>
+          (2). generation is constrained by the base video model (bottom row: fails on a 360° camera orbit).
+        </p>
+      </td>
+    </tr>
+  </table>
+
+
+</html>

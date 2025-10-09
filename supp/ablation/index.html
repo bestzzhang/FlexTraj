@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Ablation Video</title>
+  <style>
+    td {
+      text-align: center;
+    }
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 align="center">Ablation</h1>
+  <h2 align="center">Ablation on Trajectory Representation. </h2>
+  
+  <table border="1" style="width: 1100px; height: 480px;">
+    <tr>
+      <td>
+        
+        <video width="1080" height="460" controls>
+          <source src="videos/coding1.mp4" type="video/mp4">
+        </video>
+        <p>
+        Without trajID, accurate trajectory control fails due to ambiguous correspondences.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <video width="1080" height="460" controls>
+          <source src="videos/coding2.mp4" type="video/mp4">
+        </video>
+        <p>
+        Without segID, newly emerging regions are generated randomly; 
+        </p>
+        <p>
+          With segID, they follow the segmentation but lose appearance cues; with all attributes, generation matches the GT.
+         </p>
+      </td>
+    </tr>
+  </table>
+
+  <h2 align="center">Ablation on Condition Injection. </h2>
+  <table border="1" style="width: 1100px; height: 480px;">
+    <tr>
+      <td>
+        <video width="1080" height="460" controls>
+          <source src="videos/injection.mp4" type="video/mp4">
+        </video>
+        <p>
+          ControlNet-style injection provides limited control, whereas ours achieves accurate motion. 
+        </p>
+      </td>
+    </tr>
+  </table>
+
+  <h2 align="center">Ablation on Training Strategy. </h2>
+  <table border="1" style="width: 1100px; height: 480px;">
+    <tr>
+      <td>
+        <video width="1080" height="460" controls>
+          <source src="videos/strategy.mp4" type="video/mp4">
+        </video>
+        <p>
+          Random mixing or reversed schedules degrade performance, while our annealing strategy preserves accurate alignment.
+        </p>
+      </td>
+    </tr>
+  </table>
+
+</html>

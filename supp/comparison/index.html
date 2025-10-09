@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Comparison</title>
+  <style>
+    td {
+      text-align: center;
+    }
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 align="center">Comparison</h1>
+
+  <h2 align="center">Dense Task</h1>
+  
+  <p style="width: 1100px; margin: 0 auto; text-align: center;">
+  Qualitative comparison on dense control. 2D-based methods, MagicMotion and Go-with-the-Flow struggle to capture fine-grained details, while DiffusionAsShader also fails as its trajectory representation cannot handle newly emerging points. In contrast, our method outperforms them by closely following the motion in the source frames.
+  </p>
+  <br>
+  <table border="1" style="width: 1100px; height: 400px;">
+    <tr>
+      <td>
+        <video width="1000" height="356" controls>
+          <source src="videos/dense_syn.mp4" type="video/mp4">
+        </video>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <video width="1000" height="356" controls>
+          <source src="videos/dense_real.mp4" type="video/mp4">
+        </video>
+      </td>
+    </tr>
+  </table>
+
+  <h2 align="center">Spatial Sparse Task</h1>
+  <p style="width: 1100px; margin: 0 auto; text-align: center;">
+  Qualitative comparison on spatial-sparse control. The subject in the left of input image is occluded by the subject in the right. 2D-based methods (MagicMotion, ToRA) fail in handling occlusion, U-Net-based method LeviTor introduces artifacts, while ours accurately captures occlusion with high visual fidelity.
+  </p>
+  <br>
+  <table border="1" style="width: 1100px; height: 400px;">
+    <tr>
+      <td>
+        <video width="1000" height="356" controls>
+          <source src="videos/ss_syn.mp4" type="video/mp4">
+        </video>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <video width="1000" height="356" controls>
+          <source src="videos/ss_real.mp4" type="video/mp4">
+        </video>
+      </td>
+    </tr>
+  </table>
+
+  <h2 align="center">Temporal Sparse Task</h1>
+  <p style="width: 1100px; margin: 0 auto; text-align: center;">
+  Qualitative comparison on temporal-sparse control. SparseCtrl yields unsatisfactory results, while MagicMotion shows weak alignment and blurriness. Our method aligns with the anchor-frame motion and generates coherent in-between frames.
+  </p>
+  <br>
+  <table border="1" style="width: 1100px; height: 400px;">
+    <tr>
+      <td>
+        <video width="1000" height="356" controls>
+          <source src="videos/st_syn.mp4" type="video/mp4">
+        </video>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <video width="1000" height="356" controls>
+          <source src="videos/st_real.mp4" type="video/mp4">
+        </video>
+      </td>
+    </tr>
+  </table>
+
+  <h2 align="center">Unaligned Task</h1>
+  <p style="width: 1100px; margin: 0 auto; text-align: center;">
+  Qualitative comparison on unaligned control. DAS introduces artifacts (red blurriness around subject) from strict alignment, while Go-with-the-Flow produces implausible results. Our method flexibly follows input motion.
+  </p>
+  <br>
+  <table border="1" style="width: 1100px; height: 400px;">
+    <tr>
+      <td>
+        <video width="1000" height="356" controls>
+          <source src="videos/unalign_syn.mp4" type="video/mp4">
+        </video>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <video width="1000" height="356" controls>
+          <source src="videos/unalign_real.mp4" type="video/mp4">
+        </video>
+      </td>
+    </tr>
+  </table>
+</html>

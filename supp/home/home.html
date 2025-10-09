@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: auto;
+        }
+        
+        .my_text {
+            font-size: 22px;
+        }
+        .my_title {
+            font-size: 26px;
+        }
+        
+        #inner {
+            left: 10%; 
+            top: 45px; 
+            width: 80%; 
+            height: auto; 
+            position: absolute; 
+            z-index: 1;
+        }
+        
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 85%;
+        }
+        
+        td, th {
+            border: 1.5px solid #706f6f;
+            text-align: left;
+            padding: 10px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 40px;
+            /* pair 与 pair 之间的间隔 */
+        }
+
+        .pair {
+            display: grid;
+            grid-template-columns: 300px 300px; /* 两个视频并排 */
+            grid-template-rows: auto 180px;     /* 第一行自适应标题高度，第二行固定视频高 */
+            gap: 8px;                           /* 控制标题与视频的间距 */
+            justify-content: center;
+            }
+
+        .pair-title {
+            grid-column: 1 / -1;
+            justify-self: center;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 2px;
+            /* 让标题和视频更贴近一些，可按需调整 */
+        }
+
+        /* 单个视频容器尺寸 */
+        .video {
+            width: 300px;
+            height: 180px;
+        }
+
+        /* video 标签填满容器 */
+        .video video {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            /* 拉伸填满（不裁剪） */
+            display: block;
+        }
+        .video img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            display: block;
+        }
+</style>
+        
+
+<body>
+  <div class="my_text" id="inner">
+    <p class="my_title"><strong> FlexTraj: Image-to-Video Generation with Flexible Point Trajectory Control </strong></p>
+    <p></p>
+    <strong>Contents list</strong>:
+    <p></p>
+    <table>
+        <tr>
+            <td></td>
+            <td>No. of Video</td>
+        </tr>
+      </tr>
+      <tr>
+          <td> --- More Results </a></td>
+          <td></td>
+      </tr>
+        <tr>
+            <td>&emsp;&emsp; <a href="../more_results/dense_index.html" target="displayframe">1. Dense (including Motion Clone, Mesh-to-Video, Camera Redirect)</a></td>
+            <td>36</td>
+        </tr>
+        <tr>
+            <td>&emsp;&emsp; <a href="../more_results/dense_index.html" target="displayframe">2. Spatially Sparse (including Drag to Video, Partial Mesh to Video, Sparse Points to Dance Video)</a></td>
+            <td>28</td>
+        </tr>
+        <tr>
+            <td>&emsp;&emsp; <a href="../more_results/dense_index.html" target="displayframe">3. Temporally Sparse (Motion Interpolation)</a></td>
+            <td>14</td>
+        </tr>
+        <tr>
+            <td>&emsp;&emsp; <a href="../more_results/dense_index.html" target="displayframe">4. Unaligned (Flexible Action Control, Coarse Mesh to Video) </a></td>
+            <td>20</td>
+        </tr>
+
+        <tr>
+            <td> --- <a href="../comparison/index.html" target="displayframe">Comparison</a></td>
+            <td>8</td>
+        </tr>
+        <tr>
+          <td> --- <a href="../ablation/index.html" target="displayframe">Ablation</a></td>
+          <td>4</td>
+      </tr>
+    <tr>
+      <td> --- <a href="../limitation/index.html" target="displayframe">Limitation</a></td>
+      <td>2</td>
+  </tr>
+    </table>
+    <p></p>
+
+    <strong>Teaser videos</strong>
+    <p></p>
+     <!-- row 1 -->
+    <div class="row">
+        <div class="pair">
+            <div class="pair-title">1. Motion Clone</div>
+            <div class="video">
+                <video autoplay muted loop playsinline preload="auto">
+                    <source src="teaser_videos/vid1_src.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid1_gen.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <div class="pair">
+            <div class="pair-title">2. Drag to Video</div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid2_src.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid2_gen.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- row 2 -->
+    <div class="row">
+        <div class="pair">
+            <div class="pair-title">3. Motion Interpolation</div>
+            <div class="video">
+                <img src="teaser_videos/vid3_src.png" alt="">
+            </div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid3_gen.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <div class="pair">
+            <div class="pair-title">4. Redirect Camera</div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid4_src.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid4_gen.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- row 3 -->
+    <div class="row">
+        <div class="pair">
+            <div class="pair-title">5. Flexible Action Control</div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid5_src.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid5_gen.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <div class="pair">
+            <div class="pair-title">6. Meshes to Video</div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid6_src.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid6_gen.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- row 4 -->
+    <div class="row">
+        <div class="pair">
+            <div class="pair-title">7. Partial Meshes to Video</div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid7_src.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid7_gen.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <div class="pair">
+            <div class="pair-title">8. Coarse Meshes to Video</div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid8_src.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video">
+                <video autoplay muted loop playsinline>
+                    <source src="teaser_videos/vid8_gen.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <p></p>
+</div>
+
+</body>
+
+</html>

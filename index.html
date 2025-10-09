@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG" />
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG" />
+  <meta property="og:url" content="URL OF THE WEBSITE" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>FlexTraj</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <style>
+    .active-filter {
+      background-color: #2563eb !important;
+      border-color: #2563eb !important;
+      color: #fff !important;
+    }
+  </style>
+
+  <script>
+    function showSection(id, btn) {
+      const sections = ['dense', 'ss', 'ts', 'unaligned'];
+
+      // 显示/隐藏各区块
+      sections.forEach(sec => {
+        const el = document.getElementById(sec);
+        if (el) el.style.display = (id === sec) ? 'block' : 'none';
+      });
+
+      // 处理按钮样式
+      const toolbar = document.getElementById('task-filter');
+      if (toolbar) {
+        toolbar.querySelectorAll('.button').forEach(b => {
+          b.classList.remove('active-filter');  // 去除旧高亮
+          b.classList.add('is-dark');           // 恢复暗色样式
+        });
+      }
+
+      if (btn) {
+        btn.classList.add('active-filter');     // 当前高亮
+        btn.classList.remove('is-dark');        // 去掉暗色
+      }
+    }
+
+    // —— 根据 hash 决定初始可见区，并滚动到锚点 —— //
+    function activateSectionForHash() {
+      const hash = decodeURIComponent(location.hash || '');
+      if (!hash) return false;
+
+      const target = document.querySelector(hash);
+      if (!target) return false;
+
+      // 找到所属的大区块（dense / ss / ts / unaligned）
+      const parent = target.closest('#dense, #ss, #ts, #unaligned');
+      if (!parent) return false;
+
+      // 找到对应按钮
+      const btn = document.querySelector(
+        `#task-filter .button[onclick*="showSection('${parent.id}'"]`
+      );
+
+      // 先显示正确区块并高亮按钮
+      showSection(parent.id, btn);
+
+      // 再滚到具体锚点（等一帧让布局更新）
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 0);
+
+      return true;
+    }
+
+    // 页面加载：若有 hash 且匹配，就按 hash 激活；否则默认 dense
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!activateSectionForHash()) {
+        const firstBtn = document.querySelector('#task-filter .button');
+        showSection('dense', firstBtn);
+      }
+    });
+
+    // 后续 hash 变化（例如从 ss.html 回来或站内跳转）也生效
+    window.addEventListener('hashchange', activateSectionForHash);
+  </script>
+
+
+</head>
+
+
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToResults()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+
+  <!-- Paper Info -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              FlexTraj: Image-to-Video Generation with Flexible Point Trajectory Control
+            </h1>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- Supplementary PDF link -->
+                <span class="link-block">
+                  <a href="supp/supplementary.html" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Supplementary</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/IGL-HKUST/DiffusionAsShader" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark" disabled>
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Teaser image -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div style="margin-top: 15px;"></div>
+        <h2 class="subtitle has-text-centered">
+          We present <strong>FlexTraj</strong>, a multi-granularity, alignment-agnostic trajectory-control video
+          generation model <br>for all
+          the following tasks.
+        </h2>
+        <div style="margin-top: 30px;"></div>
+        <video poster="" id="teaser" autoplay muted loop controlsList="nodownload" playsinline>
+          <!-- Your video file here -->
+          <source src="static/videos/teaser.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We present FlexTraj, a framework for image-to-video generation with flexible point trajectory control.
+              FlexTraj introduces a unified
+              point-based motion representation that encodes each point with a segmentation ID, a temporally consistent
+              trajectory ID, and an optional color channel
+              for appearance cues, enabling both dense and sparse trajectory control. Instead of injecting trajectory
+              conditions into the video generator through
+              token concatenation or ControlNet, FlexTraj employs an efficient sequence-concatenation scheme that
+              achieves faster convergence, stronger controllability,
+              and more efficient inference, while maintaining robustness under unaligned conditions. To train such a
+              unified point trajectory-controlled video generator,
+              FlexTraj adopts an annealing training strategy that gradually reduces reliance on complete supervision and
+              aligned condition. Experimental results
+              demonstrate that FlexTraj enables multi-granularity, alignment-agnostic trajectory control for video
+              generation, supporting various applications
+              such as motion cloning, drag-based image-to-video, motion interpolation, camera redirection, flexible
+              action control and mesh animations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+
+  <!-- Results -->
+  <section class="section hero" id="results">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3" style="text-align:center;">Results</h2>
+      <div style="text-align:center; margin-top:30px; margin-bottom:30px;" id="task-filter">
+        <button class="button is-rounded" onclick="showSection('dense', this)">Dense</button>
+        <button class="button is-rounded" onclick="showSection('ss', this)">Spatially Sparse</button>
+        <button class="button is-rounded" onclick="showSection('ts', this)">Temporally Sparse</button>
+        <button class="button is-rounded" onclick="showSection('unaligned', this)">Unaligned</button>
+      </div>
+
+    </div>
+
+    <div id="dense">
+      <!-- Dense Clone Video carousel -->
+      <section class="hero is-small" id="dense_clone">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Motion Clone
+              <a href="dense.html#dense-clone" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a>
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Dense
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <!-- 第一组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/motion_clone/2_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/motion_clone/2_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第二组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/motion_clone/4_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/motion_clone/4_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第3组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/motion_clone/8_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/motion_clone/8_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第4组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/motion_clone/9_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/motion_clone/9_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Dense Clone Video carousel -->
+
+      <!-- Dense Mesh Video carousel -->
+      <section class="hero is-small" id="dense_mesh">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Meshes to Video
+              <a href="dense.html#dense-mesh" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a>
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Dense
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <!-- 第一组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/mesh_to_video/11_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/mesh_to_video/11_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第二组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/mesh_to_video/13_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/mesh_to_video/13_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第3组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/mesh_to_video/2_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/mesh_to_video/2_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第4组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/mesh_to_video/4_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/mesh_to_video/4_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Dense Mesh Video carousel -->
+
+      <!-- Dense Camera Video carousel -->
+      <section class="hero is-small" id="dense_camera">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Camera Redirect
+              <a href="dense.html#dense-camera" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a>
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Dense
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: flex; justify-content: space-between;">
+              <div style="padding-right: 30px;">
+                <video autoplay muted loop style="width: 98%;">
+                  <source src="static/videos/dense/camera/set1/src.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/camera/set1/v1.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/camera/set1/v3.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/camera/set1/v4.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+              <div style="padding-right: 30px;">
+                <video autoplay muted loop style="width: 98%;">
+                  <source src="static/videos/dense/camera/set2/src.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/camera/set2/v1.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/camera/set2/v3.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/dense/camera/set2/v4.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Dense Camera Video carousel -->
+
+    </div>
+
+    <div id="ss">
+      <!-- SS SinglePoint Video carousel -->
+      <section class="hero is-small" id="ss_singlepoint">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Drag to Video (Single Point)
+              <a href="ss.html#ss-singlepoint" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a>
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Spatially Sparse
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <!-- 第一组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/single_point/1.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/single_point/1.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第二组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/single_point/2.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/single_point/2.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第3组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/single_point/5.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/single_point/5.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第4组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/single_point/6.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/single_point/6.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End SS SinglePoint Video carousel -->
+
+      <!-- SS Occlusion Video carousel -->
+      <section class="hero is-small" id="ss_occlusion">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Drag to Video (Occlusion)
+              <a href="ss.html#ss-occlusion" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a>
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Spatially Sparse
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <!-- 第一组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/occlusion/car1.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/occlusion/car1.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第二组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/occlusion/car2.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/occlusion/car2.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第3组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/occlusion/new_ss1.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/occlusion/new_ss1.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第4组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/occlusion/new_ss2.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/occlusion/new_ss2.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      <!-- End SS Occlusion Video carousel -->
+
+      <!-- SS Partial Video carousel -->
+      <section class="hero is-small" id="ss_partial">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Partial Meshes to Video
+              <a href="ss.html#ss-partial" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a>
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Spatially Sparse
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <!-- 第一组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/partial_mesh/newss_walking1.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/partial_mesh/newss_walking1.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第二组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/partial_mesh/newss_walking2.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/partial_mesh/newss_walking2.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第3组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/partial_mesh/newss_walking3.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/partial_mesh/newss_walking3.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第4组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/partial_mesh/newss_walking4.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/partial_mesh/newss_walking4.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      <!-- End SS Partial Video carousel -->
+
+      <!-- SS Dance Video carousel -->
+      <section class="hero is-small" id="ss_dance">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Sparse Points to Video
+              <!-- <a href="ss.html#ss-dance" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a> -->
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Spatially Sparse
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <!-- 第一组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/dance/1.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/dance/1.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第二组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/dance/2.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/dance/2.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第3组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/dance/3.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/dance/3.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第4组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/src/dance/4.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/ss/gen/dance/4.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      <!-- End SS Dance Video carousel -->
+    </div>
+
+    <div id="ts">
+      <!-- ST Interpolation Video carousel -->
+      <section class="hero is-small" id="st_interpolation">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Motion Interpolation
+              <a href="st.html#st-interpolation" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a>
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Temporally Sparse
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <!-- 第一组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-image" style="flex: 1;">
+                  <img src="static/videos/st/0_src.png" style="width: 98%;">
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/st/0_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第二组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-image" style="flex: 1;">
+                  <img src="static/videos/st/3_src.png" style="width: 98%;">
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/st/3_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第3组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-image" style="flex: 1;">
+                  <img src="static/videos/st/11_src.png" style="width: 98%;">
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/st/11_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第4组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-image" style="flex: 1;">
+                  <img src="static/videos/st/12_src.png" style="width: 98%;">
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/st/12_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+            </div>
+          </div>
+      </section>
+      <!-- End ST Interpolation Video carousel -->
+    </div>
+
+    <div id="unaligned">
+      <!-- Unaligned Real Video carousel -->
+      <section class="hero is-small" id="unaligned_real">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Flexible Action Control (Real-world Video)
+              <a href="unaligned.html#unaligned-real" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a>
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Unaligned
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <!-- 第一组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/real/1_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/real/1_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第二组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/real/6_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/real/6_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第3组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/real/0_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/real/0_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第4组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/real/8_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/real/8_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+      </section>
+      <!-- End Unaligned Real Video carousel -->
+
+      <!-- Unaligned Synthesis Video carousel -->
+      <section class="hero is-small" id="unaligned_syn">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Flexible Action Control (Synthesis Video)
+              <a href="unaligned.html#unaligned-syn" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a>
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Unaligned
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <!-- 第一组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/flex/0_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/flex/0_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第二组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/flex/1_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/flex/1_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第3组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/flex/4_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/flex/4_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第4组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/flex/5_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/flex/5_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+      </section>
+      <!-- End Unaligned Synthesis Video carousel -->
+
+      <!-- Unaligned Coarse Video carousel -->
+      <section class="hero is-small" id="unaligned_coarse">
+        <div class="hero-body">
+          <div class="container" style="max-width: 1000px;">
+            <h2 class="title has-text-centered" style="font-size: 2em;">
+              Coarse Meshes to Video
+              <!-- <a href="unaligned.html#unaligned-coarse" class="button is-small is-rounded is-dark" style="margin-left: 10px;">
+                Click for More Results
+              </a> -->
+              <p class="button is-small is-rounded is-dark" disabled>
+                Task lable: Unaligned
+              </p>
+            </h2>
+
+            <div style="margin-top: 50px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <!-- 第一组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/box/0_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/box/0_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第二组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/box/1_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/box/1_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第3组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/box/2_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/box/2_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <!-- 第4组：原图像和生成视频 -->
+              <div class="video-group" style="display: flex; align-items: center; justify-content: center;">
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/box/4_src.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-video" style="flex: 1;">
+                  <video autoplay muted loop style="width: 98%;">
+                    <source src="static/videos/unalign/syn/box/4_gen.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+      </section>
+      <!-- End Coarse Synthesis Video carousel -->
+    </div>
+  </section>
+  <!-- End Results -->
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+        </code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you link back to this page in the
+              footer. <br> This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Statcounter tracking code -->
+
+  <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+  <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
