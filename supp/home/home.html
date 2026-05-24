@@ -41,15 +41,15 @@
         .row {
             display: flex;
             justify-content: center;
-            margin-bottom: 30px;
-            gap: 40px;
+            margin-bottom: 20px;
+            gap: 20px;
             /* pair 与 pair 之间的间隔 */
         }
 
         .pair {
             display: grid;
-            grid-template-columns: 300px 300px; /* 两个视频并排 */
-            grid-template-rows: auto 180px;     /* 第一行自适应标题高度，第二行固定视频高 */
+            grid-template-columns: 200px 200px; /* 两个视频并排 */
+            grid-template-rows: auto 120px;     /* 第一行自适应标题高度，第二行固定视频高 */
             gap: 8px;                           /* 控制标题与视频的间距 */
             justify-content: center;
             }
@@ -66,8 +66,8 @@
 
         /* 单个视频容器尺寸 */
         .video {
-            width: 300px;
-            height: 180px;
+            width: 200px;
+            height: 120px;
         }
 
         /* video 标签填满容器 */
@@ -84,7 +84,30 @@
             object-fit: fill;
             display: block;
         }
-</style>
+        
+        /* 新增：单视频容器行 */
+        .row-single {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        /* 这里的宽度 608px 是为了对齐上面两个 300px 视频加 8px 间距的效果 */
+        .video-full-width {
+            width: 600px; 
+            height: auto; /* 高度可自适应，或设为固定值如 342px (16:9) */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .video-full-width video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* 建议用 contain 保证视频比例不失真 */
+            background: #000;    /* 视频黑边背景 */
+        }
+        </style>
         
 
 <body>
@@ -98,31 +121,14 @@
             <td></td>
             <td>No. of Video</td>
         </tr>
-      </tr>
-      <tr>
-          <td> --- More Results </a></td>
-          <td></td>
-      </tr>
-        <tr>
-            <td>&emsp;&emsp; <a href="../../dense.html" target="displayframe">1. Dense (including Motion Clone, Mesh-to-Video, Camera Redirect)</a></td>
-            <td>36</td>
-        </tr>
-        <tr>
-            <td>&emsp;&emsp; <a href="../../ss.html" target="displayframe">2. Spatially Sparse (including Drag to Video, Partial Mesh to Video, Sparse Points to Dance Video)</a></td>
-            <td>28</td>
-        </tr>
-        <tr>
-            <td>&emsp;&emsp; <a href="../../st.html" target="displayframe">3. Temporally Sparse (Motion Interpolation)</a></td>
-            <td>14</td>
-        </tr>
-        <tr>
-            <td>&emsp;&emsp; <a href="../../unaligned.html" target="displayframe">4. Unaligned (Flexible Action Control, Coarse Mesh to Video) </a></td>
-            <td>20</td>
-        </tr>
-
         <tr>
             <td> --- <a href="../comparison/index.html" target="displayframe">Comparison</a></td>
             <td>8</td>
+        </tr>
+
+        <tr>
+          <td> --- <a href="../user_study/index.html" target="displayframe">User Study</a></td>
+          <td>20</td>
         </tr>
         <tr>
           <td> --- <a href="../ablation/index.html" target="displayframe">Ablation</a></td>
@@ -132,11 +138,13 @@
       <td> --- <a href="../limitation/index.html" target="displayframe">Limitation</a></td>
       <td>2</td>
   </tr>
+  <tr>
+      <td> --- <a href="../general/index.html" target="displayframe">Generalization (Wan2.2)</a></td>
+      <td>22</td>
+  </tr>
     </table>
     <p></p>
 
-    <strong>Teaser videos</strong>
-    <p></p>
      <!-- row 1 -->
     <div class="row">
         <div class="pair">
@@ -275,6 +283,7 @@
     </div>
 
     <p></p>
+
 </div>
 
 </body>

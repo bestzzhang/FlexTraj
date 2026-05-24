@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generalization</title>
+  <style>
+    body, html
+    {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 40px; /* pair 与 pair 之间的间隔 */
+    }
+    .pair {
+      display: flex;
+      flex-direction: column; /* 让标题在视频上方 */
+      align-items: center;
+      gap: 8px; /* 标题和视频之间的间隔 */
+    }
+    .videos {
+      display: flex;
+      gap: 8px; /* pair 内部两个视频的间隔 */
+    }
+    .video {
+      width: 300px;
+      height: 180px;
+      background-color: #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .video video {
+      width: 100%;
+      height: 100%;
+      object-fit: fill; /* 填满容器 */
+      display: block;
+    }
+    .video img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      display: block;
+    }
+    .row-1-4 {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .row-1-4 .left {
+      margin-right: 60px; /* 左 1 和右 4 的距离 */
+    }
+    .row-1-4 .right {
+      display: flex;
+      gap: 10px; /* 右边4个之间的间距 */
+    }
+    .titles {
+      display: flex;
+      gap: 8px; /* 标题之间的间隔，与视频间隔一致 */
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .title {
+      width: 300px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+ <h1>Dense Task (81 frames)</h1>
+ <!-- 第一行 -->
+  <div class="row">
+    <div class="pair">
+      <div class="titles">
+        <div class="title">Source</div>
+        <div class="title">Generated</div>
+      </div>
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/1_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/1_tgt_crop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="titles">
+        <div class="title">Source</div>
+        <div class="title">Generated</div>
+      </div>
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/2_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/2_tgt_crop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/3_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/3_tgt_crop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/Capoeira_render_24.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/4_tgt_crop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/Capoeira_render_24.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/5_tgt_crop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/Capoeira_render_24.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/dense/6_tgt_crop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1>Spatial Sparse Task (81 frames)</h1>
+
+  <!-- 第一行 -->
+  <div class="row">
+    <div class="pair">
+      <div class="titles">
+        <div class="title">Source</div>
+        <div class="title">Generated</div>
+      </div>
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/ss/1_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/ss/1_tgt_crop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="titles">
+        <div class="title">Source</div>
+        <div class="title">Generated</div>
+      </div>
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/ss/2_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/ss/2_tgt_crop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/ss/3_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/ss/3_tgt_crop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/ss/4_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/ss/4_tgt_crop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1>Temporal Sparse Task (81 frames)</h1>
+
+  <!-- 第一行 -->
+  <div class="row">
+    <div class="pair">
+      <div class="titles">
+        <div class="title">Source</div>
+        <div class="title">Generated</div>
+      </div>
+      <div class="videos">
+        <div class="video">
+          <img src="videos/st/0_src.png">
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/st/0_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="titles">
+        <div class="title">Source</div>
+        <div class="title">Generated</div>
+      </div>
+      <div class="videos">
+        <div class="video">
+          <img src="videos/st/1_src.png">
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/st/1_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <div class="row">
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <img src="videos/st/8_src.png">
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/st/8_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <img src="videos/st/9_src.png">
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/st/9_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1>Unaligned Task (81 frames)</h1>
+  <!-- 第一行 -->
+  <div class="row">
+    <div class="pair">
+      <div class="titles">
+        <div class="title">Source</div>
+        <div class="title">Generated</div>
+      </div>
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/0_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/0_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="titles">
+        <div class="title">Source</div>
+        <div class="title">Generated</div>
+      </div>
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/1_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/1_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/2_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/2_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/3_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/3_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/6_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/6_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/7_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/7_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/8_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/8_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="videos">
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/9_src.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video">
+          <video autoplay muted loop playsinline>
+            <source src="videos/unalign/9_tgt.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
